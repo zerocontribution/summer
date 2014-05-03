@@ -1,7 +1,4 @@
-me Idea
-===
-
-- Action Adventure 
+- Action Adventure
   - Singleplayer
   - No graphics (just polygon shapes, colors representing different types of enemies)
     - Some enemies may be bigger, some slower / faster, some spawn as groups
