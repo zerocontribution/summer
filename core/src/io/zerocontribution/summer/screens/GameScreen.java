@@ -10,14 +10,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.google.inject.Inject;
 import io.zerocontribution.summer.AppInjector;
 import io.zerocontribution.summer.Assets;
 import io.zerocontribution.summer.Constants;
 import io.zerocontribution.summer.components.*;
-import io.zerocontribution.summer.systems.AnimationRenderingSystem;
-import io.zerocontribution.summer.systems.CameraSystem;
-import io.zerocontribution.summer.systems.MapRenderingSystem;
+import io.zerocontribution.summer.systems.*;
 
 public class GameScreen extends AbstractScreen {
 
@@ -39,12 +38,17 @@ public class GameScreen extends AbstractScreen {
         world = new World();
         world.setManager(new TagManager());
 
-        world.setSystem(new MapRenderingSystem());
+        TiledMap map = new TmxMapLoader().load("maps/sewers.tmx");
+
         world.setSystem(new CameraSystem());
+        world.setSystem(AppInjector.injector.getInstance(PlayerInputSystem.class));
+        world.setSystem(new MovementSystem(map));
+        world.setSystem(new MapRenderingSystem());
         world.setSystem(AppInjector.injector.getInstance(AnimationRenderingSystem.class));
+        world.setSystem(AppInjector.injector.getInstance(DebugHudSystem.class));
 
         createPlayer();
-        createView(new TmxMapLoader().load("maps/sewers.tmx"));
+        createView(map);
 
         world.initialize();
     }
@@ -59,11 +63,16 @@ public class GameScreen extends AbstractScreen {
     private void createPlayer() {
         Entity e = world.createEntity();
 
-        e.addComponent(new Position(5, 5));
         e.addComponent(new Condition());
         e.addComponent(new AnimationName("square.png"));
         e.addComponent(new SpriteColor(Color.BLUE));
         e.addComponent(new Dimensions(20, 20));
+        Bounds bounds = new Bounds();
+        bounds.rect = new Rectangle(0, 0, 20, 20);
+        e.addComponent(bounds);
+        e.addComponent(new Position(0, 0));
+        e.addComponent(new Velocity(0, 0));
+        e.addComponent(new Player());
 
         world.getManager(TagManager.class).register(Constants.Tags.PLAYER, e);
         e.addToWorld();
@@ -76,7 +85,6 @@ public class GameScreen extends AbstractScreen {
         camera.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.camera.position.x = camera.camera.viewportWidth / 2;
         camera.camera.position.y = camera.camera.viewportHeight / 2;
-        camera.camera.update();
         spriteBatch.setProjectionMatrix(camera.camera.combined);
         e.addComponent(camera);
 
