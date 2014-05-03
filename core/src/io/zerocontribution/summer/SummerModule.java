@@ -22,8 +22,8 @@ public class SummerModule extends AbstractModule {
         Gdx.input.setInputProcessor(inputMultiplexer);
         bind(InputMultiplexer.class).toInstance(inputMultiplexer);
 
+        bind(Assets.class).toInstance(new Assets("assets.xml"));
         bind(Skin.class).toInstance(new Skin(Gdx.files.internal("ui/HoloSkin/Holo-dark-hdpi.json")));
-
         bind(ScreenService.class).toInstance(new ScreenService(game));
     }
 }

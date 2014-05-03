@@ -22,6 +22,7 @@ public class MainMenuScreen extends AbstractScreen {
         });
 
         Table table = new Table();
+        table.setFillParent(true);
         table.add(playButton);
 
         stage.addActor(table);

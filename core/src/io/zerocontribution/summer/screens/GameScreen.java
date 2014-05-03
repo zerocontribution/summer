@@ -4,16 +4,18 @@ import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.google.inject.Inject;
+import io.zerocontribution.summer.AppInjector;
+import io.zerocontribution.summer.Assets;
 import io.zerocontribution.summer.Constants;
-import io.zerocontribution.summer.components.Camera;
-import io.zerocontribution.summer.components.MapView;
-import io.zerocontribution.summer.components.Position;
+import io.zerocontribution.summer.components.*;
+import io.zerocontribution.summer.systems.AnimationRenderingSystem;
 import io.zerocontribution.summer.systems.CameraSystem;
 import io.zerocontribution.summer.systems.MapRenderingSystem;
 
@@ -22,17 +24,24 @@ public class GameScreen extends AbstractScreen {
     @Inject
     SpriteBatch spriteBatch;
 
+    @Inject
+    Assets assets;
+
     World world;
 
     @Override
     public void show() {
         super.show();
 
+        assets.loadGroup("base");
+        assets.finishLoading(); // TODO Move this stuff to a loading screen instead... someday.
+
         world = new World();
         world.setManager(new TagManager());
 
         world.setSystem(new MapRenderingSystem());
         world.setSystem(new CameraSystem());
+        world.setSystem(AppInjector.injector.getInstance(AnimationRenderingSystem.class));
 
         createPlayer();
         createView(new TmxMapLoader().load("maps/sewers.tmx"));
@@ -51,6 +60,10 @@ public class GameScreen extends AbstractScreen {
         Entity e = world.createEntity();
 
         e.addComponent(new Position(5, 5));
+        e.addComponent(new Condition());
+        e.addComponent(new AnimationName("square.png"));
+        e.addComponent(new SpriteColor(Color.BLUE));
+        e.addComponent(new Dimensions(20, 20));
 
         world.getManager(TagManager.class).register(Constants.Tags.PLAYER, e);
         e.addToWorld();
