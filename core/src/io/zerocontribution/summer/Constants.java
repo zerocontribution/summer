@@ -13,4 +13,11 @@ public class Constants {
          */
         public final static String PLAYER = "player";
     }
+
+    public static class Groups {
+        /**
+         * All loot drop entities.
+         */
+        public final static String DROPS = "drops";
+    }
 }

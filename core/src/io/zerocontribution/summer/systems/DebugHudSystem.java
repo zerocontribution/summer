@@ -17,7 +17,7 @@ public class DebugHudSystem extends VoidEntitySystem {
     @Override
     protected void initialize() {
         spriteBatch = new SpriteBatch();
-        
+
         font = new BitmapFont();
         font.setUseIntegerPositions(false);
     }

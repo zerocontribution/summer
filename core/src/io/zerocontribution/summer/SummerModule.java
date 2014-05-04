@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.google.inject.AbstractModule;
+import io.zerocontribution.summer.services.ItemService;
 import io.zerocontribution.summer.services.ScreenService;
 
 public class SummerModule extends AbstractModule {
@@ -25,5 +26,6 @@ public class SummerModule extends AbstractModule {
         bind(Assets.class).toInstance(new Assets("assets.xml"));
         bind(Skin.class).toInstance(new Skin(Gdx.files.internal("ui/HoloSkin/Holo-dark-hdpi.json")));
         bind(ScreenService.class).toInstance(new ScreenService(game));
+        bind(ItemService.class).toInstance(new ItemService());
     }
 }

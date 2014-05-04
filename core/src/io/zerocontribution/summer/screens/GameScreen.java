@@ -2,6 +2,7 @@ package io.zerocontribution.summer.screens;
 
 import com.artemis.Entity;
 import com.artemis.World;
+import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -37,6 +38,7 @@ public class GameScreen extends AbstractScreen {
 
         world = new World();
         world.setManager(new TagManager());
+        world.setManager(new GroupManager());
 
         TiledMap map = new TmxMapLoader().load("maps/sewers.tmx");
 
@@ -73,6 +75,7 @@ public class GameScreen extends AbstractScreen {
         e.addComponent(new Position(0, 0));
         e.addComponent(new Velocity(0, 0));
         e.addComponent(new Player());
+        e.addComponent(new Inventory());
 
         world.getManager(TagManager.class).register(Constants.Tags.PLAYER, e);
         e.addToWorld();
