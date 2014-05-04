@@ -19,5 +19,10 @@ public class Constants {
          * All loot drop entities.
          */
         public final static String DROPS = "drops";
+
+        /**
+         * All enemies, alive or dead.
+         */
+        public final static String ENEMIES = "enemies";
     }
 }
