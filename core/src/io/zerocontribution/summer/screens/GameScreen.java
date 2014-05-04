@@ -53,6 +53,7 @@ public class GameScreen extends AbstractScreen {
         world.setSystem(AppInjector.injector.getInstance(AnimationRenderingSystem.class));
         world.setSystem(AppInjector.injector.getInstance(DebugHudSystem.class));
         world.setSystem(new SpawnerSystem());
+        world.setSystem(new ExpiringSystem());
 
         createPlayer();
         createView(map);
