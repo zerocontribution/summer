@@ -45,11 +45,14 @@ public class GameScreen extends AbstractScreen {
         world.setSystem(new CameraSystem());
         world.setSystem(AppInjector.injector.getInstance(PlayerInputSystem.class));
         world.setSystem(new MovementSystem(map));
+        world.setSystem(AppInjector.injector.getInstance(ActionInputProcessingSystem.class));
+        world.setSystem(new ActionInputProcessingSystem());
+        world.setSystem(new DamageProcessingSystem());
+        world.setSystem(new LootSystem());
         world.setSystem(new MapRenderingSystem());
         world.setSystem(AppInjector.injector.getInstance(AnimationRenderingSystem.class));
         world.setSystem(AppInjector.injector.getInstance(DebugHudSystem.class));
         world.setSystem(new SpawnerSystem());
-        world.setSystem(new LootSystem());
 
         createPlayer();
         createView(map);

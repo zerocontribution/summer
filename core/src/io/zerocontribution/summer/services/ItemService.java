@@ -1,5 +1,6 @@
 package io.zerocontribution.summer.services;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
 import io.zerocontribution.summer.components.Item;
 
@@ -25,4 +26,8 @@ public class ItemService {
         return items.get(id);
     }
 
+    public Item getRandom() {
+        // TODO Create loot tables and only drop certain items % times.
+        return items.get(MathUtils.random(0, items.size - 1));
+    }
 }

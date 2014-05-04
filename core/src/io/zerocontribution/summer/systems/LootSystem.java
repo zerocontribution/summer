@@ -62,17 +62,15 @@ public class LootSystem extends EntitySystem {
         Drop drop = dropMapper.get(loot);
         Inventory inventory = inventoryMapper.get(player);
 
-        if (drop.itemId > 0) {
-            Item item = itemService.get(drop.itemId);
+        Item item = itemService.getRandom();
 
-            if (inventory.addItem(item)) {
-                Log.info("Loot", "Picked up item " + drop.itemId);
-            } else {
-                Log.info("Loot", "Could not pick up item " + drop.itemId);
-            }
-
-            // TODO Notification of new item
+        if (inventory.addItem(item)) {
+            Log.info("Loot", "Picked up item " + drop.itemId);
+        } else {
+            Log.info("Loot", "Could not pick up item " + drop.itemId);
         }
+
+        // TODO Notification of new item
 
         world.deleteEntity(loot);
     }
