@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.google.inject.AbstractModule;
+import io.zerocontribution.summer.pools.Vector2Pool;
 import io.zerocontribution.summer.services.AbilityService;
 import io.zerocontribution.summer.services.ItemService;
 import io.zerocontribution.summer.services.ScreenService;
