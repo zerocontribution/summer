@@ -2,6 +2,7 @@ package io.zerocontribution.summer.components;
 
 import com.artemis.Component;
 import com.badlogic.gdx.utils.ObjectMap;
+import io.zerocontribution.summer.ai.AI;
 import io.zerocontribution.summer.struct.Delay;
 
 public class Actor extends Component {

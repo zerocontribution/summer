@@ -102,6 +102,8 @@ public class GameScreen extends AbstractScreen {
         view.renderer = new OrthogonalTiledMapRenderer(map, spriteBatch);
         e.addComponent(view);
 
+        e.addComponent(new PairMap());
+
         world.getManager(TagManager.class).register(Constants.Tags.VIEW, e);
         e.addToWorld();
     }

@@ -29,6 +29,7 @@ public class EliteSpawner extends Spawner {
         int playerLevel = player.getComponent(Stats.class).level;
         e.addComponent(new Stats(playerLevel + levelDifference));
         e.addComponent(new Affixes(levelDifference));
+        e.addComponent(new Npc())
 
         Log.info("EliteSpawner", "Elite[" + e.getComponent(Affixes.class).toLog() + "] created");
 

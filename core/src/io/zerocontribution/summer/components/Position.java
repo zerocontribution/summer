@@ -12,6 +12,13 @@ public class Position extends Component {
         this.gridY = gridY;
     }
 
+    public Position(float gridX, float gridY, float worldX, float worldY) {
+        this.gridX = gridX;
+        this.gridY = gridY;
+        x = worldX;
+        y = worldY;
+    }
+
     public void setTarget(Position position) {
         targetX = position.targetX;
         targetY = position.targetY;
